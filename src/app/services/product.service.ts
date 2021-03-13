@@ -7,14 +7,22 @@ import { ListResponseModel } from '../models/listResponseModel';
   providedIn: 'root'
 })
 export class ProductService {
-  apiUrl="https://localhost:44368/api/products/getall"//datayı aldım
+  apiUrl="https://localhost:44368/api/"//datayı aldım
   constructor(private httpClient : HttpClient) { }
 
   getProducts():Observable<ListResponseModel<Product>>{
+    let newPath = this.apiUrl+"products/getall"
       return this.httpClient
-    .get<ListResponseModel<Product>>(this.apiUrl) //bu url te gett işlemi yap dönen sonucu (prM)le yolla
+    .get<ListResponseModel<Product>>(newPath) //bu url te gett işlemi yap dönen sonucu (prM)le yolla
     
 
   }
+  getProductsByCategory(categoryId:number):Observable<ListResponseModel<Product>>{
+    let newPath = this.apiUrl+"products/getbycategory?categoryId="+categoryId
+    return this.httpClient
+  .get<ListResponseModel<Product>>(newPath) //bu url te gett işlemi yap dönen sonucu (prM)le yolla
+  
+
+}
  
 }
