@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from 'src/app/models/product';
+import { CartService } from 'src/app/services/cart.service';
 
 
 import { ProductService } from 'src/app/services/product.service';
@@ -21,7 +22,8 @@ export class ProductComponent implements OnInit {
 
   constructor(private productService :ProductService,
     private activateRoute: ActivatedRoute,
-    private toastrService:ToastrService) { }  //ben apiden httpclient türünde birşey istiyorum 
+    private toastrService:ToastrService,
+    private cartService:CartService) { }  //ben apiden httpclient türünde birşey istiyorum 
 
 
   ngOnInit(): void {
@@ -61,6 +63,7 @@ export class ProductComponent implements OnInit {
    }
    addToCart(product:Product){
      this.toastrService.success("Sepete Eklendi",product.productName)
+     this.cartService.addToCart(product);
 
 
    }
